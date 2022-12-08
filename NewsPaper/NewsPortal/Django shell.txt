@@ -22,6 +22,27 @@
     Comment.objects.create(Post.objects.get(id=1),'QQQ', 'Comment1')
     Comment.objects.create(Post.objects.get(id=2),'WWW', 'Comment2')
     Comment.objects.create(Post.objects.get(id=3),'QQQ', 'Comment3')
-    Comment.objects.create(Post.objects.get(id=4),'WWW', 'Comment4') #Четвёртого поста нет
+    Comment.objects.create(Post.objects.get(id=2),'QQQ', 'Comment4')
 
 7)
+     Comment.objects.get(id=1).like()
+     Comment.objects.get(id=1).like()
+     Comment.objects.get(id=2).dislike()
+     Post.objects.get(id=1).like()
+     Post.objects.get(id=3).dislike()
+     Comment.objects.get(id=1).comment_rating()
+     Comment.objects.get(id=2).comment_rating()
+     Post.objects.get(id=1).post_rating()
+     Post.objects.get(id=3).post_rating()
+
+8)
+     Author.objects.get('QQQ').update_rating()
+     Author.objects.get('WWW').update_rating()
+9)
+    Author.objects.order_by('rating') [0]
+10)
+    Post.object.order_by('rating')
+
+11)
+    Comment.object.order_by('rating')
+
