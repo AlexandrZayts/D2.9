@@ -15,6 +15,9 @@ class Author(models.Model):
 class Category(models.Model):
     category = models.CharField(max_length=64, unique=True)
 
+    def __str__(self):
+        return self.category.title()
+
 
 article = 'ar'
 news = 'ns'
@@ -33,14 +36,15 @@ class Post(models.Model):
     post_text = models.TextField()
     post_rating = models.IntegerField(default=0)
 
+
     def like(self):
         return self.post_rating + 1
 
     def dislike(self):
         return self.post_rating - 1
 
-    def preview(self):
-        return self.post_text[0:123] + '...'
+    def __str__(self):
+        return f'{self.post_header.title()}: {self.post_text[:20]}' #!!!!2
 
 
 class PostCategory(models.Model):
