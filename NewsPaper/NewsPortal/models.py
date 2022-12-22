@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 class Author(models.Model):
     Author_User = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -44,7 +45,10 @@ class Post(models.Model):
         return self.post_rating - 1
 
     def __str__(self):
-        return f'{self.post_header.title()}: {self.post_text[:20]}' #!!!!2
+        return f'{self.post_header.title()}: {self.post_text[:20]}'
+
+    def get_absolute_url(self):
+        return reverse('posts.html', args=[str(self.id)])
 
 
 class PostCategory(models.Model):
