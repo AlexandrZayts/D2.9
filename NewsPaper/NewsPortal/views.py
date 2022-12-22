@@ -1,7 +1,7 @@
+from datetime import datetime
 from django.views.generic import ListView, DetailView
 from .models import Post
 from .filters import PostFilter
-
 
 class PostsList(ListView):
 
@@ -20,8 +20,6 @@ class PostsList(ListView):
         context = super().get_context_data(**kwargs)
         context['filterset'] = Post.filterset
         return context
-
-    def search
 
 
 class PostDetail(DetailView):
