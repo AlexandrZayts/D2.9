@@ -11,6 +11,10 @@ News
 {% block content %}
 <h1>Все Новости</h1>
 <hr>
+{% if perms.NewsPortal.create_news %}
+<a href="{% url 'news_create' %}">Создать пост</a>
+{% endif %}
+
 {% if Post %}
 <table>
      <tr>

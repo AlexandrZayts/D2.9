@@ -1,12 +1,12 @@
 from django_filters import FilterSet, DateTimeFilter, ModelChoiceFilter
 from django.forms import DateTimeInput
-from .models import Post
+from .models import Post, Category
 
 
 
 class PostFilter(FilterSet):
     category = ModelChoiceFilter(
-        field_name='category',
+        field_name='Сategory',
         queryset=Category.objects.all(),
         label='Категория поста',
         empty_label='Все'
