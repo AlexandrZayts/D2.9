@@ -7,15 +7,3 @@ class NewsPortalConfig(AppConfig):
 
     def ready(self):
         import NewsPortal.signals
-
-        from .tasks import send_mails
-        from .scheduler import weekly_scheduler
-        print('started')
-
-        weekly_scheduler.add_job(
-            id='mail_send',
-            func=send_mails,
-            trigger='interval',
-            seconds=10,
-
-        )
