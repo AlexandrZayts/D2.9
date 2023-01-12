@@ -22,3 +22,11 @@ class PostForm(forms.ModelForm):
             )
 
         return cleaned_data
+
+class BasicSignupForm(SignupForm):
+
+    def save(self, requst):
+        user = super(BasicSignupForm, self).save(requst)
+        basic_group = Group.object.get(name='common')
+        basic_group.user_set.add(user)
+        return
