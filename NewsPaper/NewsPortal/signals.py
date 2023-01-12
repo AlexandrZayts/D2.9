@@ -1,19 +1,39 @@
-from django.db.models.signals import post_save
+from django.conf import settings
+from django.core.mail import EmailMultiAlternatives
+from django.db.models.signals import m2m_changed
 from django.dispatch import receiver
-from django.core.mail import mail_managers
-from .models import Post
+from django.template.loader import render_to_string
+
+from .models import PostCategory
 
 
-@receiver(post_save, sender=Post)
-def notify_managers_Post(sender, instance, created, **kwargs):
-    if created:
-        subject = f'{instance.client_name} {instance.date.strftime("%d %m %Y")}'
-    else:
-        subject = f'Новый пост в подписанной категории {instance.client_name} {instance.date.strftime("%d %m %Y")}'
-
-    mail_managers(
-        subject=subject,
-        message=instance.message,
+def send_notifications(previev, pk, title, subsribers):
+    html_content = render_to_string(
+        'post_created_email.html',
+        {
+            'text':previev,
+            'link': f'{settings.SITE_URL}/news/{pk}'
+        }
     )
 
-post_save.connect(notify_managers_Post, sender=Post)
+    msg = EmailMultiAlternatives(
+        subject=title,
+        body='',
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        to=subsribers,
+    )
+    msg.attach_alternative(html_content, 'text/html')
+    msg.send()
+
+@receiver(m2m_changed, sender=PostCategory)
+def notify_about_new_post(sender, instance, **kwargs):
+    if kwargs['action'] == 'post_add':
+        categories = instance.category.all()
+        subsribers: list[str] = []
+        for category in categories:
+            subsribers += category.subscribers.all()
+
+
+        subsribers = [s.email for s in subsribers]
+
+        send_notifications(instance.preview(), instance.pk, instance.title, subsribers)

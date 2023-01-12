@@ -45,7 +45,7 @@ class Post(models.Model):
     def dislike(self):
         return self.post_rating - 1
 
-    def __str__(self):
+    def preview(self):
         return f'{self.post_header.title()}: {self.post_text[:20]}'
 
     def get_absolute_url(self):

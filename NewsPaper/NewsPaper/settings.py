@@ -36,16 +36,16 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django.contrib.staticfiles',
     'django.contrib.flatpages',
-    'NewsPortal',
-    'django_apscheduler',
+    'NewsPortal.apps.NewsPortalConfig',
     'django_filters',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.yandex',
+    'django_apscheduler',
 
 ]
 
@@ -138,17 +138,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
-
+LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = "/news"
+ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-DEFAULT_FROM_EMAIL = 'sanyaDjango@yandex.ru'
-
 SITE_ID = 1
+SITE_URL = 'http://127.0.0.1:8000/'
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
@@ -161,6 +161,7 @@ EMAIL_PORT = 465
 EMAIL_HOST_USER = 'sanyaDjango'
 EMAIL_HOST_PASSWORD = '30062022qAz!'
 EMAIL_USE_SSL = True
+DEFAULT_FROM_EMAIL = 'sanyaDjango@yandex.ru'
 
 APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
 APSCHEDULER_RUN_NOW_TIMEOUT = 25
