@@ -1,3 +1,4 @@
+from allauth.account.forms import SignupForm
 from django import forms
 from django.core.exceptions import ValidationError
 
@@ -9,7 +10,7 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ['Post_Author', 'Post_PostCategory', 'post_header', 'post_text']
+        fields = ['Post_Author', 'post_PostCategory', 'post_header', 'post_text']
 
     def clean(self):
         cleaned_data = super().clean()
