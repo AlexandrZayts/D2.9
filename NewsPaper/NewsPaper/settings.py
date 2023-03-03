@@ -280,19 +280,19 @@ LOGGING = {
         },
         'django.server': {
             'handlers': ['errors', 'critical', 'mail_admins'],
-            'propagate': False,
+            'propagate': True,
         },
         'django.template': {
             'handlers': ['errors', 'critical'],
-            'propagate': False,
+            'propagate': True,
         },
         'django.db.backends': {
             'handlers': ['errors', 'critical'],
-            'propagate': False,
+            'propagate': True,
         },
         'django.security': {
             'handlers': ['security'],
-            'propagate': False,
+            'propagate': True,
         }
     }
 }
