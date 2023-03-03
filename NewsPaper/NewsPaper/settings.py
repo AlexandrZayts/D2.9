@@ -181,21 +181,24 @@ CACHES = {
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
-    'style': '{',
     'formatters': {
         'console': {
+            'style': '{',
             'format': '{asctime} {levelname} {message}',
             'datetime': '%m.%d %H:%M:%S',
         },
         'warning': {
+            'style': '{',
             'format': '{asctime} {levelname} {message} {pathname}',
             'datetime': '%m.%d %H:%M:%S',
         },
         'errors': {
+            'style': '{',
             'format': '{asctime} {levelname} {message} {pathname} {exc_info}',
             'datetime': '%m.%d %H:%M:%S',
         },
         'general': {
+            'style': '{',
             'format': '{asctime} {levelname} {module} {message}',
             'datetime': '%m.%d %H:%M:%S',
         },
